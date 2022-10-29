@@ -1,0 +1,13 @@
+{% extends "app1/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<p><a href="{% url 'app1:person' %}" >{{user.username}}</a></p>
+<p class="font-weight-bolder">edit person (personal information): </p>
+<form action="{% url 'app1:edit_person' person.id %}" method="post" class="form font-weight-bolder">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button class="btn btn-primary btn-block text-center" name="submit">Save Changes</button>
+    {% endbuttons %}
+</form>
+{% endblock content %}

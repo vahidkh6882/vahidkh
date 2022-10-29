@@ -1,0 +1,12 @@
+{% extends "app1/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<p class="font-weight-bolder" style="font-family:eng5;">add a new expenses : </p>
+<form action="{% url 'app1:new_expenses' %}" method="post" class="form" style="font-family:eng5;">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button class="btn btn-primary btn-block text-center" name="submit">Add New Expenses</button>
+    {% endbuttons %}
+</form>
+{% endblock content %}

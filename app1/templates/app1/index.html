@@ -1,0 +1,83 @@
+{% extends "app1\base.html" %}
+{% load static %}
+{% block content %}
+ <div>
+   <p class="display-4">Project Of Kashmar Univercity Dormitory</p>
+   <p class="font-weight-bolder" style="font-family:eng2;">programmer and the designer : VAHID KHAZAEI </p>
+   <a class="btn btn-primary btn-block" data-toggle="tooltip" data-placement="right" title="Hooray!" href="{% url 'users:register' %}">register</a>
+ </div>
+ <div class="carousel slide" id="main" data-ride="carousel">
+      <ul class="carousel-indicators" >
+        <li class="active" data-target="#demo" data-slide-to="0"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+      </ul>
+      <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card">
+              <img src="{% static 'abstract_geometric_diagonal_shape_in_dark_background.jpg' %}" class="w-100 h-75" >
+              <div class=" card-img-overlay d-flex justify-content-center flex-column text-center text-white">
+                <p class="font-weight-bolder">Builder and Designer</p>
+                <h5>
+                  {% if user.is_authenticated %}
+                  The programmer , designer and owner Of this website say "Hi <span class="font-weight-bolder">{{user.username}}</span> . Welcome to my website .<br>
+                  I hope you find it useful "
+                  {% else %}
+                  The programmer , designer and owner Of this website say "Hi . Welcome to my website .<br>
+                  I hope you find it useful "
+                  {% endif %}
+                </h5>
+              </div>
+            </div>
+            <div class="carousel-caption">
+              <h5>Hi 
+                {% if user.is_authenticated %}
+                  {{user.username}}
+                {% endif %}
+              </h5>
+              <p>welcome to our project</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <img src="{% static '101.jpg' %}"  class="card-img-top w-100 h-75">
+              <div class=" mask card-img-overlay d-flex justify-content-center flex-column text-center text-white">
+                <p class="font-weight-bolder">NEWS</p>
+                <p>
+                  This site was established on 1401/08/06 <br> and is for personal use at no cost
+                </p>
+              </div>
+            </div>
+            <div class="carousel-caption">
+              <h5>News</h5>
+              <p>about new version of site</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <img src="{% static 'OQCI8X0.jpg' %}"  class=" w-100 h-75">
+              <div class=" mask card-img-overlay d-flex justify-content-center flex-column text-center text-white">
+                <p class="font-weight-bolder">NEWS</p>
+                <p>
+                  This site was established on 1401/08/06 <br> and is for personal use at no cost
+                </p>
+              </div>
+            </div>
+            <div class="carousel-caption">
+              <h5>Los Angeles</h5>
+              <p>We had such a great time in LA!</p>
+            </div>
+          </div>
+      </div>
+      <a class="carousel-control-prev" href="#main" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#main" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+  </div>
+    
+  
+{% endblock content %}
+
+              

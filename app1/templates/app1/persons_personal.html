@@ -1,0 +1,17 @@
+{% extends "app1/base.html" %}
+{% block content %}
+<div class="card shadow-lg ">
+	<div class=" card-header text-center display-3 shadow-sm">
+		<p> {{person.name}} {{person.lastname}}</p>
+	</div>
+	<div class=" card-body font-weight-bolder ">
+		<p>details:</p>
+			<p>this person have <kbd> {{person.bullet}} </kbd> tomans in his bullet </p>
+			and he should pay <kbd> {{person.owe}} </kbd> tomans to the leader
+	</div>
+	<div class="card-footer d-flex justify-content-between ">
+	    <a href="{% url 'app1:edit_person_bullet' person.id %}">edit bullet</a>
+		<a href="{% url 'app1:edit_person' person.id %}">edit person</a>
+	</div>
+</div>
+	  {% endblock content %}

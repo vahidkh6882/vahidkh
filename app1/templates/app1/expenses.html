@@ -1,0 +1,38 @@
+{% extends "app1\base.html" %}
+{% load static %}
+{% block content %}
+<div class="col">
+    {% for x in expenses reversed %}
+    <div class="card mb-2">
+        <div class="card-header">
+            <p>ITEM : {{x.name}}</p>
+        </div>
+        <div class="card-body">
+            <p>You bought this item on {{x.date_added|date:'M d, Y H:i'}} for the price of {{x.cost}} tomans</p>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-success"  href="{% url 'app1:edit_expenses' x.id  %}" class="btn btn-primary">Edit this item</a>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modaldels">delete expenses</button>
+        </div>
+    </div>
+    <div class="modal fade" id="modaldels">        
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Delete Item</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to remove this row and this information ?!</p>
+                </div>
+                <div class="modal-footer">
+                    <a  class="btn btn-danger" href="{% url 'app1:delete_expenses' x.id %}">delete expense</a>  
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No items</p>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends "app1/base.html" %}
+{% block content %}
+<p class="mt-4 font-weight-bolder">Add Money to {{person.name}} {{person.lastname}} : </p>
+<form class="form d-flex flex-column" action="{% url 'app1:edit_person_bullet' person.id %}" method="post">
+    {% csrf_token %}
+    <input class="form-control mb-4" type="number" name="num" method="POST" max="100000" min="5000" autofocus>
+    <button name="submit" class="btn btn-primary text-center form-control mb-4"> save changes </button>
+</form>
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% load bootstrap4 %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta name="viewport" content="width=device-width,intial-scale=1,shrink-to-fit=no">
+      <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+      <title>dormitory</title>
+      {% bootstrap_css %}
+      {% bootstrap_javascript jquery='full' %}
+   </head>
+   <body>
+       <nav class="navbar navbar-expand-md navbar-light bg-light mb-1 border fixed-top">
+         <ul class="navbar-nav">
+            <li class="nav-item">
+               <a class="nav-link font-weight-bold" href="{% url 'app1:index' %}">main page</a>
+            </li>
+         </ul>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'app1:person' %}">Portal</a>
+               </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+               {% if user.is_authenticated %}
+                  <li class="nav-item">
+                     <span class="navbar-text">Hello , {{user.username}} .</span>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+                  </li>
+               {% else %}
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+               </li>
+               {% endif %}
+            </ul>
+         </div>
+       </nav>
+       <main role="main" class="container-fluid sizemax mt-5 mb-5" >
+         <div class="pb-2 mb-1">
+            {% block page-header %}{% endblock page-header %}
+         </div>
+         <div style="font-family:eng2;">
+            {% block content %}{% endblock content %}
+         </div>
+       </main>
+       <div class="bg-dark rounded text-white lead strong" style="font-family:eng5;">
+         <p>Welcome to our site and we are glad that you joined us.</p>
+         <p >This site is a test and initial project, which is just a web programming exercise and is coded with HTML,
+             CSS, JavaScript, Bootstrap and Backend Python language with Django framework. </p>
+         <p class="small">Please let us know if you see a bug in order to improve and improve this site.</p>
+         <p class="small">Thank you very much</p>
+         <p>gmail:vahidkh6882@gmail.com</p>
+       </div>
+   </body>
+</html>
