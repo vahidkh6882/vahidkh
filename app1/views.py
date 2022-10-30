@@ -4,7 +4,7 @@ from .forms import PersonForm,ExpensesForm,PersonFormall,CommentForm
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 def index(request):
-    return render(request,'app1\index.html')
+    return render(request,'app1/index.html')
 @login_required
 def person(request):                                                #persons list with expenses in cartable
     person=Person.objects.filter(captain=request.user)
