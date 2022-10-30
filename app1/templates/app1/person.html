@@ -1,9 +1,9 @@
 {% extends "app1/base.html" %}
 {% block content %}
-    <p class="text-center display-4">Participants :</p>
+    <p class="text-center display-4 mt-4" style="font-size:6vw;">Participants :</p>
     <div class="border-bottom border-dark mb-4"></div>
     <div class="col">
-            <div class="row card-group font-weight-bolder" style="font-family:eng2;">
+            <div class="row card-group font-weight-bolder d-flex justify-content-center" style="font-family:eng2;">
                 {% for x in person %}
                 <div class="card shadow-lg m-2">
                     <div class="card-header">{{x}}</div>
@@ -37,14 +37,14 @@
                 {% endfor %}
             </div>
             <p><a class="btn btn-success btn-lg btn-block mt-4 font-weight-bolder" href="{% url 'app1:new_person' %}" class="ml-auto">add new participant</a></p>
-            <p class="display-4 text-center">Expenses</p>
+            <p class="display-4 text-center" style="font-size:6vw;">Expenses</p>
             <div class="border-bottom mb-4 border-dark "></div>
             <div class="row d-flex flex-column " style="font-family:eng5;">
                     {% for y in expenses %}
                     <div class="card flex-fill mb-2 shadow-sm" style="font-family:eng2;">
                         <div class="card-header bg-white">
                             <button class="btn btn-block btn-info m-2 shadow-lg" data-toggle="collapse" data-target="#expense{{y.id}}">
-                                <h3>{{y}}</h3>
+                                <h3 style="font-size:4vw;">{{y}}</h3>
                             </button>
                        </div>
                     </div>
@@ -59,14 +59,14 @@
                     {% endfor %}
             </div>
             <p><a class="btn btn-success btn-lg btn-block mt-3 font-weight-bolder" href="{% url 'app1:new_expenses' %}">add new expenses</a></p>
-            <p class="display-4 text-center">comments</p>
+            <p class="display-4 text-center" style="font-size:6vw;">comments</p>
             <div class="border-bottom border-dark"></div>
             <div class="col font-weight-bolder" style="font-family:eng2;">
                 <div class="row"></div>
                 {% for z in comments %}
                 <div class="media border p-3 mt-3 mb-3 row">
                     <div class="media-body">
-                        <h4>{{z.name}} posted on {{z.date_added|date:'M d, Y H:i'}}</h4>
+                        <h4 style="font-size:2vw;">{{z.name}} posted on {{z.date_added|date:'M d, Y H:i'}}</h4>
                         <p>{{z.text}}</p>
                     </div>
                 </div>
