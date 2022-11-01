@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Person,Expenses,Comment
 from .forms import PersonForm,ExpensesForm,PersonFormall,CommentForm
 from django.http import Http404
@@ -21,7 +21,7 @@ def person(request):                                                #persons lis
     return render(request,'app1/person.html',content)
 @login_required
 def persons_personal(request,topic_id):                                      #page of a person in a captain group 
-    person=Person.objects.get(id=topic_id)
+    person=get_object_or_404(Person,id=topic_id)
     if person.captain != request.user :
         raise Http404
     context={'person':person}
