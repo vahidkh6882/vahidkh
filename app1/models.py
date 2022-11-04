@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 class Person(models.Model):
     captain=models.ForeignKey(User,on_delete=models.CASCADE)
+    adminswitch=False
     name=models.CharField(max_length=200)
     lastname=models.CharField(max_length=200)
     owe=models.IntegerField()

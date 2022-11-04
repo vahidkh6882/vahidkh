@@ -9,7 +9,6 @@ def register(request):
         form=UserCreationForm()
     else:
         form=UserCreationForm(data=request.POST)
-        form2=PersonForm()
         if form.is_valid():
             new_user=form.save()
             login(request,new_user)
@@ -17,6 +16,7 @@ def register(request):
             form2.name=new_user.username
             form2.captain=request.user
             form2.lastname="(admin)"
+            form2.adminswitch=True
             form2.owe=0
             form2.bullet=0
             form2.save()

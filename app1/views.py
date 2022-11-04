@@ -146,7 +146,10 @@ def delete_expenses(request,item_id):
 @login_required
 def delete_person(request,item_id):
     person=Person.objects.get(id=item_id)
-    person.delete()
+    if person.adminswitch == False :
+             person.delete()
+    else :
+             raise Http404
     return redirect('app1:person')
 @login_required
 def add_comment(request):
