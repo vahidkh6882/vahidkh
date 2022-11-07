@@ -40,6 +40,7 @@ def new_person(request):
         if form.is_valid():
             new_person=form.save(commit=False)
             new_person.captain=request.user
+            new_person.adminswitch=False
             new_person.owe=0
             new_person.bullet=0
             new_person.save()
