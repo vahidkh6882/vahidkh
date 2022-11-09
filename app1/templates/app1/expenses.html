@@ -12,10 +12,10 @@
         </div>
         <div class="card-footer">
             <a class="btn btn-success"  href="{% url 'app1:edit_expenses' x.id  %}" class="btn btn-primary">Edit this item</a>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modaldels">delete expenses</button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modaldels{{x.id}}">delete expenses</button>
         </div>
     </div>
-    <div class="modal fade" id="modaldels">        
+    <div class="modal fade" id="modaldels{{x.id}}">        
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
