@@ -63,7 +63,7 @@ def new_expenses(request):
     else:
         form=ExpensesForm(data=request.POST)
         if form.is_valid():
-            new_entry=form.save(commit=False)
+            new_entry =form.save(commit=False)
             costp = new_entry.cost / number
             new_entry.person=request.user
             for person in persons :
