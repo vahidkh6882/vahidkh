@@ -1,5 +1,5 @@
 from django import forms
-from .models import Person,Expenses,Comment
+from .models import Person, Expenses,Comment
 class PersonForm(forms.ModelForm):
     class Meta :
         model=Person
