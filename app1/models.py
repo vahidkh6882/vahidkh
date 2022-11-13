@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 class Person(models.Model):
+    CHOICES=((0,'saturday'),(1,'sunday'),(2,'monday'),(3,'tuesday'),(4,'thursday'),(5,'wednesday'),(6,'friday'))
     captain=models.ForeignKey(User,on_delete=models.CASCADE)
     adminswitch=models.BooleanField(default=False)
     name=models.CharField(max_length=200)
     lastname=models.CharField(max_length=200)
     owe=models.IntegerField()
     bullet=models.IntegerField()
+    week = models.IntegerField(choices=CHOICES, default="user")
     def __str__(self):
         return self.name + " " + self.lastname
 class Expenses(models.Model):

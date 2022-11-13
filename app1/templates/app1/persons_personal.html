@@ -7,7 +7,8 @@
 	<div class=" card-body font-weight-bolder ">
 		<p>details:</p>
 			<p>this person have <kbd> {{person.bullet}} </kbd> tomans in his bullet </p>
-			and he should pay <kbd> {{person.owe}} </kbd> tomans to the leader
+			<p>, he should pay <kbd> {{person.owe}} </kbd> tomans to the leader</p>
+			<p>and he should do the duties on <kbd>{{duty}}</kbd> .</p>
 	</div>
 	<div class="card-footer d-flex justify-content-between ">
 	    <a href="{% url 'app1:edit_person_bullet' person.id %}">edit bullet</a>

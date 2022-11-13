@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Person,Expenses,Comment
-from .forms import PersonForm,ExpensesForm,PersonFormall,CommentForm
+from .forms import PersonForm,ExpensesForm,CommentForm
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 def index(request):
@@ -22,9 +22,11 @@ def person(request):                                                #persons lis
 @login_required
 def persons_personal(request,topic_id):                                      #page of a person in a captain group 
     person=get_object_or_404(Person,id=topic_id)
+    weeks={0:'saturday',1:'sunday',2:'monday',3:'tuesday',4:'thursday',5:'wednesday',6:'friday'}
+    duty=weeks[person.week]
     if person.captain != request.user :
         raise Http404
-    context={'person':person}
+    context={'person':person,'duty':duty}
     return render(request,'app1/persons_personal.html',context)
 @login_required
 def expenses(request):                                                  #page expenses
@@ -33,12 +35,16 @@ def expenses(request):                                                  #page ex
     return render(request,'app1/expenses.html',context)
 @login_required
 def new_person(request):
+    persons=Person.objects.filter(captain=request.user)
     if request.method !='POST' :
         form=PersonForm()
     else:
         form=PersonForm(data=request.POST)
         if form.is_valid():
             new_person=form.save(commit=False)
+            for x in persons : 
+                if new_person.week == x.week:
+                    raise Http404
             new_person.captain=request.user
             new_person.adminswitch=False
             new_person.owe=0
@@ -129,12 +135,17 @@ def edit_person_bullet(request,entry_id) :
     return render(request,'app1/edit_person_bullet.html',context)
 @login_required
 def edit_person(request,entry_id):
+    persons=Person.objects.filter(captain=request.user)
     person=Person.objects.get(id=entry_id)
     if request.method != 'POST' :
         form=PersonForm(instance=person)
     else :
         form=PersonForm(instance=person,data=request.POST)
         if form.is_valid():
+            editperson=form.save(commit=False)
+            for x in persons : 
+                if editperson.week == x.week:
+                    raise Http404
             form.save()
             return redirect('app1:person')
     context={'person':person,'form':form}
