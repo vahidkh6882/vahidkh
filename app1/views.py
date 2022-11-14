@@ -30,7 +30,7 @@ def persons_personal(request,topic_id):                                      #pa
     return render(request,'app1/persons_personal.html',context)
 @login_required
 def expenses(request):                                                  #page expenses
-    expenses=Expenses.objects.filter(person=request.user).order_by('date_added')
+    expenses = Expenses.objects.filter(person=request.user).order_by('date_added')
     context={'expenses':expenses}
     return render(request,'app1/expenses.html',context)
 @login_required
