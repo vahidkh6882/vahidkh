@@ -36,7 +36,7 @@ def expenses(request):                                                  #page ex
 @login_required
 def new_person(request):
     persons=Person.objects.filter(captain=request.user)
-    if request.method !='POST' :
+    if request.method != 'POST' :
         form=PersonForm()
     else:
         form=PersonForm(data=request.POST)
