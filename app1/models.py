@@ -8,7 +8,7 @@ class Person(models.Model):
     lastname=models.CharField(max_length=200)
     owe=models.IntegerField()
     bullet=models.IntegerField()
-    week = models.TextField(max_length=20,choices=CHOICES,default='user')
+    week = models.TextField(max_length=20,choices=CHOICES)
     def __str__(self):
         return self.name + " " + self.lastname
 class Expenses(models.Model):
