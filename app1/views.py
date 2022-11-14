@@ -42,9 +42,6 @@ def new_person(request):
         form=PersonForm(data=request.POST)
         if form.is_valid():
             new_person=form.save(commit=False)
-            for x in persons : 
-                if new_person.week == x.week:
-                    raise Http404
             new_person.captain=request.user
             new_person.adminswitch=False
             new_person.owe=0
@@ -143,9 +140,6 @@ def edit_person(request,entry_id):
         form=PersonForm(instance=person,data=request.POST)
         if form.is_valid():
             editperson=form.save(commit=False)
-            for x in persons : 
-                if editperson.week == x.week:
-                    raise Http404
             form.save()
             return redirect('app1:person')
     context={'person':person,'form':form}

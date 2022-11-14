@@ -3,7 +3,7 @@ from .models import Person,Expenses,Comment
 class PersonForm(forms.ModelForm):
     class Meta :
         model=Person
-        fields=['name','lastname','week']
+        fields=['name','lastname']
         labels={'text':''}
 class ExpensesForm(forms.ModelForm):
     class Meta :
