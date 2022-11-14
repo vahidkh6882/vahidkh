@@ -22,9 +22,11 @@ def person(request):                                                #persons lis
 @login_required
 def persons_personal(request,topic_id):                                      #page of a person in a captain group 
     person=get_object_or_404(Person,id=topic_id)
+    weeks={'zero':'saturday','one':'sunday','two':'monday','three':'tuesday','four':'thursday','five':'wednesday','six':'friday'}
+    duty=weeks[person.week]
     if person.captain != request.user :
         raise Http404
-    context={'person':person}
+    context={'person':person,'duty':duty}
     return render(request,'app1/persons_personal.html',context)
 @login_required
 def expenses(request):                                                  #page expenses
@@ -40,6 +42,9 @@ def new_person(request):
         form=PersonForm(data=request.POST)
         if form.is_valid():
             new_person=form.save(commit=False)
+            for x in persons : 
+                if new_person.week == x.week:
+                    raise Http404
             new_person.captain=request.user
             new_person.adminswitch=False
             new_person.owe=0
@@ -138,6 +143,9 @@ def edit_person(request,entry_id):
         form=PersonForm(instance=person,data=request.POST)
         if form.is_valid():
             editperson=form.save(commit=False)
+            for x in persons : 
+                if editperson.week == x.week:
+                    raise Http404
             form.save()
             return redirect('app1:person')
     context={'person':person,'form':form}
