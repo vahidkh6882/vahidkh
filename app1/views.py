@@ -22,11 +22,9 @@ def person(request):                                                #persons lis
 @login_required
 def persons_personal(request,topic_id):                                      #page of a person in a captain group 
     person=get_object_or_404(Person,id=topic_id)
-    weeks={'zero':'saturday','one':'sunday','two':'monday','three':'tuesday','four':'thursday','five':'wednesday','six':'friday'}
-    duty=weeks[person.week]
     if person.captain != request.user :
         raise Http404
-    context={'person':person,'duty':duty}
+    context={'person':person}
     return render(request,'app1/persons_personal.html',context)
 @login_required
 def expenses(request):                                                  #page expenses
