@@ -17,7 +17,7 @@ def register(request):
             form2.captain=request.user
             form2.lastname="(admin)"
             form2.adminswitch=True
-            form2.week='zero'
+            form2.week='6'
             form2.owe=0
             form2.bullet=0
             form2.save()
