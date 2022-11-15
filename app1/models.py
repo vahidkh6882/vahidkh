@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 class Person(models.Model):
-    CHOICES=(('zero','saturday'),('one','sunday'),('two','monday'),('three','tuesday'),('four','thursday'),('five','wednesday'),('six','friday'))
+    CHOICES=(('5','saturday'),('6','sunday'),('0','monday'),('1','tuesday'),('2','thursday'),('3','wednesday'),('4','friday'))
     captain=models.ForeignKey(User,on_delete=models.CASCADE)
     adminswitch=models.BooleanField(default=False)
     name=models.CharField(max_length=200)

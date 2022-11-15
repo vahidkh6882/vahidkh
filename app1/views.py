@@ -3,13 +3,22 @@ from .models import Person,Expenses,Comment
 from .forms import PersonForm,ExpensesForm,CommentForm
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 def index(request):
     return render(request,'app1/index.html')
 @login_required
 def person(request):                                                #persons list with expenses in cartable
+    CHOICES={'5':'saturday','6':'sunday','0':'monday','1':'tuesday','2':'thursday','3':'wednesday','4':'friday'}
     person=Person.objects.filter(captain=request.user)
     comments=Comment.objects.filter(userpage=request.user)
     expenses=Expenses.objects.filter(person=request.user).order_by('date_added')
+    dt = datetime.now()
+    day=dt.weekday()
+    duty_owner = 'null'
+    for person_duty in person:
+        if person_duty.week == str(day) :
+            duty_owner = person_duty.name + " " + person_duty.lastname + " : today ( " + CHOICES[person_duty.week] + " )"
+            break
     s=1
     x=[]
     for i in reversed(expenses):
@@ -17,12 +26,12 @@ def person(request):                                                #persons lis
         if(s>=5):
             break
         s=s+1
-    content={'person':person,'expenses':x ,'comments':comments}
+    content={'person':person,'expenses':x ,'comments':comments,'duty_owner':duty_owner}
     return render(request,'app1/person.html',content)
 @login_required
 def persons_personal(request,topic_id):                                      #page of a person in a captain group 
     person=get_object_or_404(Person,id=topic_id)
-    weeks={'zero':'saturday','one':'sunday','two':'monday','three':'tuesday','four':'thursday','five':'wednesday','six':'friday'}
+    weeks={'5':'saturday','6':'sunday','0':'monday','1':'tuesday','2':'wednesday','3':'thursday','4':'friday'}
     duty=weeks[person.week]
     if person.captain != request.user :
         raise Http404
@@ -31,6 +40,8 @@ def persons_personal(request,topic_id):                                      #pa
 @login_required
 def expenses(request):                                                  #page expenses
     expenses = Expenses.objects.filter(person=request.user).order_by('date_added')
+    for x in expenses:
+        print(x.date_added)
     context={'expenses':expenses}
     return render(request,'app1/expenses.html',context)
 @login_required
