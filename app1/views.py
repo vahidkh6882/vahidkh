@@ -8,7 +8,7 @@ def index(request):
     return render(request,'app1/index.html')
 @login_required
 def person(request):                                                #persons list with expenses in cartable
-    CHOICES={'5':'saturday','6':'sunday','0':'monday','1':'tuesday','2':'thursday','3':'wednesday','4':'friday'}
+    CHOICES={'5':'saturday','6':'sunday','0':'monday','1':'tuesday','2':'wednesday','3':'thursday','4':'friday'}
     person=Person.objects.filter(captain=request.user)
     comments=Comment.objects.filter(userpage=request.user)
     expenses=Expenses.objects.filter(person=request.user).order_by('date_added')
