@@ -69,6 +69,14 @@
                     <div class="media-body">
                         <h4 style="font-size:2vw;">{{z.name}} posted on {{z.date_added|date:'M d, Y H:i'}}</h4>
                         <p>{{z.text}}</p>
+                        {% if z.answer != "null" %}
+                        <div class="media p-3">
+                            <div class="media-body">
+                               <h4>answer from super user (admin) :</h4>
+                               <p>{{z.answer}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% empty %}

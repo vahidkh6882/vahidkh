@@ -24,6 +24,7 @@ class Expenses(models.Model):
 class Comment(models.Model):
     userpage=models.ForeignKey(User, on_delete = models.CASCADE)
     name=models.CharField(max_length=200)
+    answer=models.TextField(default="null")
     text=models.TextField()
     date_added=models.DateTimeField(auto_now_add=True)
     def __str__(self):
