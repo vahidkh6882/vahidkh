@@ -21,6 +21,7 @@ def register(request):
             form2.owe=0
             form2.bullet=0
             form2.save()
+            messages.success(request, "You are registered successfully .")
             return redirect('app1:index')
     context={'form':form}
     return render(request,'registration/register.html',context)

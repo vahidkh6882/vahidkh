@@ -3,6 +3,7 @@ from .models import Person,Expenses,Comment
 from .forms import PersonForm,ExpensesForm,CommentForm
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from datetime import datetime
 def index(request):
     return render(request,'app1/index.html')
@@ -40,8 +41,6 @@ def persons_personal(request,topic_id):                                      #pa
 @login_required
 def expenses(request):                                                  #page expenses
     expenses = Expenses.objects.filter(person=request.user).order_by('date_added')
-    for x in expenses:
-        print(x.date_added)
     context={'expenses':expenses}
     return render(request,'app1/expenses.html',context)
 @login_required
@@ -61,6 +60,7 @@ def new_person(request):
             new_person.owe=0
             new_person.bullet=0
             new_person.save()
+            messages.success(request, "The person has been successfully added . ")
             return redirect('app1:person')
     context={'form':form}
     return render(request,'app1/new_person.html',context)
@@ -86,6 +86,7 @@ def new_expenses(request):
                     person.owe+=x
                 person.save()
             new_entry.save()
+            messages.success(request, "The item has been successfully added . ")
             return redirect('app1:person')
     context={'expenses':expenses,'form':form}
     return render(request,'app1/new_expenses.html',context)
@@ -125,6 +126,7 @@ def edit_expenses(request,entry_id):
                         person.owe = person.owe - costbetween
                     person.save()
             form.save()
+            messages.success(request, "The item has been successfully updated . ")
             return redirect('app1:expenses')
     context={'expenses':expenses,'form':form}
     return render(request,'app1/edit_expenses.html',context)
@@ -141,6 +143,7 @@ def edit_person_bullet(request,entry_id) :
             elif person.owe == 0 :
                 person.bullet += x
             person.save()
+            messages.success(request, "The person's bullet has been successfully updated . ")
             return redirect('app1:person')
     context={'person':person}
     return render(request,'app1/edit_person_bullet.html',context)
@@ -158,6 +161,7 @@ def edit_person(request,entry_id):
                 if editperson.week == x.week:
                     raise Http404
             form.save()
+            messages.success(request, "The person has been successfully updated . ")
             return redirect('app1:person')
     context={'person':person,'form':form}
     return render(request,'app1/edit_person.html',context)
@@ -165,6 +169,7 @@ def edit_person(request,entry_id):
 def delete_expenses(request,item_id):
     expenses=Expenses.objects.get(id=item_id)
     expenses.delete()
+    messages.success(request, "The item has been successfully deleted !")
     return redirect('app1:person')
 @login_required
 def delete_person(request,item_id):
@@ -173,6 +178,7 @@ def delete_person(request,item_id):
         person.delete()
     elif(person.adminswitch == True) :
         raise Http404
+    messages.success(request, "The person has been successfully deleted !")
     return redirect('app1:person')
 @login_required
 def add_comment(request):
@@ -184,6 +190,7 @@ def add_comment(request):
           comment=form.save(commit=False)
           comment.userpage=request.user
           comment.save()
+          messages.success(request, "Your comment sent seccessfully . ")
           return redirect('app1:person')
     content={'form':form}
     return render(request,'app1/add_comment.html',content)
