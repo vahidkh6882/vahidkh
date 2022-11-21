@@ -1,12 +1,33 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Person,Expenses,Comment
+from .models import Person,Expenses,Comment,Ip
 from .forms import PersonForm,ExpensesForm,CommentForm
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime
+from django.db.models import Q
 def index(request):
-    return render(request,'app1/index.html')
+    def get_ip(request):
+        address = request.META.get('HTTP_X_FORWARDED_FOR')
+        if address :
+            ip = address.split(',')[-1].strip()
+        else : 
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+    ip = get_ip(request)
+    u = Ip(ip=ip)
+    result = Ip.objects.filter(Q(ip__icontains=ip))
+    if len(result) == 1:
+        print("user exist")
+    elif len(result) > 1:
+        print("user exist more ...")
+    else : 
+        u.save()
+        print("user is unique")
+    count = Ip.objects.all().count()
+    print("total user is ",count)
+    context = {'count':count}
+    return render(request,'app1/index.html',context)
 @login_required
 def person(request):                                                #persons list with expenses in cartable
     CHOICES={'5':'saturday','6':'sunday','0':'monday','1':'tuesday','2':'wednesday','3':'thursday','4':'friday'}
