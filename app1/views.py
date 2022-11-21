@@ -19,7 +19,7 @@ def index(request):
     result = Ip.objects.filter(Q(ip__icontains=ip))
     if len(result) == 1:
         print("user exist")
-    elif len(result) > 1:
+    elif len(result) > 1 :
         print("user exist more ...")
     else : 
         u.save()
