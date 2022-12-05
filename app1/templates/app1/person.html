@@ -17,7 +17,7 @@
     <div class="col">
             <div class="row card-group font-weight-bolder d-flex justify-content-center" style="font-family:eng2;">
                 {% for x in person %}
-                <div class="card shadow-lg m-2">
+                <div class="card container-fluid shadow-lg m-2">
                     <div class="card-header">{{x}}</div>
                     <div class="card-body">
                         <p class="card-text">owe : {{x.owe}}</p>
@@ -45,11 +45,15 @@
                     </div>
                 </div>
                 {% empty %}
-                <h3 class="text-center mt-4">no participant have been added</h3>
+                <div class="bg-danger rounded shadow">
+                    <h3 class="text-center mt-4">no participant have been added</h3>
+                </div>
                 {% endfor %}
             </div>
-            <p><a class="btn btn-success btn-lg btn-block mt-4 font-weight-bolder" href="{% url 'app1:new_person' %}" class="ml-auto">add new participant</a></p>
-            <p class="text-center font-weight-bold" style="font-size:2vw;">Duty to clean and go shopping  {{duty_owner}}</p>
+            <p><a class="btn btn-lg btn-outline-success btn-block mt-4 font-weight-bolder shadow ml-auto" href="{% url 'app1:new_person' %}" >add new participant</a></p>
+            <div class="text-white rounded shadow-sm" style="background-color:#800040;">
+                <p class="text-center font-weight-bold" style="font-size:2vw;">Duty to clean and go shopping  {{duty_owner}}</p>
+            </div>
             <p class="display-4 text-center" style="font-size:6vw;">Expenses</p>
             <div class="border-bottom mb-4 border-dark "></div>
             <div class="row d-flex flex-column " style="font-family:eng5;">
@@ -68,10 +72,12 @@
                         </div> 
                     </div>
                     {% empty %}
-                    <h3 class="text-center font-weight-bolder m-4">no expenses have been added</h3>
+                    <div class="container text-white bg-danger rounded shadow">
+                        <h3 class="text-center font-weight-bolder m-4">no expenses have been added</h3>
+                    </div>
                     {% endfor %}
             </div>
-            <p><a class="btn btn-success btn-lg btn-block mt-3 font-weight-bolder" href="{% url 'app1:new_expenses' %}">add new expenses</a></p>
+            <p><a class="btn btn-outline-success btn-lg btn-block mt-3 font-weight-bolder" href="{% url 'app1:new_expenses' %}">add new expenses</a></p>
             <p class="display-4 text-center" style="font-size:6vw;">comments</p>
             <div class="border-bottom border-dark"></div>
             <div class="col font-weight-bolder" style="font-family:eng2;">

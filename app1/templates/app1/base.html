@@ -13,16 +13,21 @@
        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm mb-1 border fixed-top">
          <ul class="navbar-nav mr-3">
             <li class="nav-item">
-               <a class="nav-link border rounded shadow font-weight-bold text-white" style="background-color: 	#ff944d;" href="{% url 'app1:index' %}">main page</a>
+               <a class="nav-link border rounded shadow font-weight-bold text-white" style="background-color: 	#ff944d;" href="{% url 'app1:index' %}">Main page</a>
             </li>
          </ul>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
          </button>
          <div id="navbarCollapse" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-2">
                <li class="nav-item font-weight-bolder text-dark">
                   <a class="nav-link " href="{% url 'app1:person' %}">Portal</a>
+               </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item font-weight-bolder text-dark">
+                  <a class="nav-link " href="{% url 'app1:admin:login' %}">Admin</a>
                </li>
             </ul>
             <ul class="navbar-nav ml-auto font-weight-bold ">

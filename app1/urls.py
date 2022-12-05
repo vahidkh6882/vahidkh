@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
 app_name='app1'
 urlpatterns=[
     path('',views.index,name='index'),
@@ -14,4 +15,5 @@ urlpatterns=[
     path('delete_person/<int:item_id>',views.delete_person,name='delete_person'),
     path('delete_expenses/<int:item_id>',views.delete_expenses,name='delete_expenses'),
     path('edit_person/<int:entry_id>/',views.edit_person,name='edit_person'),
+    path('admin/',admin.site.urls,name='admin'),
     ]
